@@ -22,10 +22,12 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
 	}
 
 	private final long port;
+	private final String bindAddress;
 	private Object serverInstance = null;
 
-	REPLServer(final long port) {
+	public REPLServer(final String bindAddress, final long port) {
 		this.port = port;
+		this.bindAddress = bindAddress;
 	}
 
 	@Override
@@ -38,15 +40,16 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
 		if (serverInstance == null) {
 			Clojure.var("clojure.core", "require").invoke(Clojure.read("clojure.tools.nrepl.server"));
 			serverInstance = Clojure.var("clojure.tools.nrepl.server", "start-server")
-					.invoke(Clojure.read(":port"), port);
-			LOGGER.info("Started nREPL on port {}", port);
+					.invoke(Clojure.read(":port"), port,
+							Clojure.read(":bind"), bindAddress);
+			LOGGER.info("Started nREPL on {}:{}", bindAddress, port);
 		}
 	}
 
 	@Override
 	public void destroy() {
 		if (serverInstance != null) {
-			LOGGER.info("Shutting down nREPL on port {}", port);
+			LOGGER.info("Shutting down nREPL on {}:{}", bindAddress, port);
 			Clojure.var("clojure.tools.nrepl.server", "stop-server").invoke(serverInstance);
 			serverInstance = null;
 		}

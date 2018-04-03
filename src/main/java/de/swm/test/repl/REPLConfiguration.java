@@ -14,9 +14,12 @@ public class REPLConfiguration {
 	@Value("${test.repl.port:7888}")
 	private long port;
 
+	@Value("${test.repl.bind-address:localhost}")
+	private String bindAddress;
+
 	@Bean
 	@Profile("test-repl")
 	REPLServer testREPLServer() {
-		return new REPLServer(port);
+		return new REPLServer(bindAddress, port);
 	}
 }

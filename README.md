@@ -20,5 +20,6 @@ To use, add the following snippet to your POM and build and run your Spring appl
 
 Putting the dependency in a Maven profile ensures that the dependency on Clojure does not pollute any builds (test, production, dev) unless explicitly enabled during the Maven build.
 
-When running the application, activate the spring profile `test-repl` to automatically start a REPL on port 7888.
+When running the application, activate the spring profile `test-repl` to automatically start a REPL listening on localhost:7888.
 The port can be changed by setting the property `test.repl.port` to a different port.
+The bind address can be changed by setting the property `test.repl.bind-address` to a different value.
