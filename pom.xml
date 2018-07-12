@@ -17,6 +17,13 @@
     <name>test-repl</name>
     <description>Adds a Clojure REPL to Spring applications for test purposes</description>
 
+    <!-- GIT-Pfade für Release-Plugin -->
+    <scm>
+        <connection>scm:git:git://github.intra.swm.de/Hans-Sebastian/test-repl.git</connection>
+        <developerConnection>scm:git:git@github.intra.swm.de:Hans-Sebastian/test-repl.git</developerConnection>
+        <url>https://github.intra.swm.de/Hans-Sebastian/test-repl</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
