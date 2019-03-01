@@ -11,7 +11,7 @@ To use, add the following snippet to your POM and build and run your Spring appl
 			<dependency>
 				<groupId>de.swm.test</groupId>
 				<artifactId>test-repl</artifactId>
-				<version>1.1.0-SNAPSHOT</version>
+				<version>1.2.0-SNAPSHOT</version>
 				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
