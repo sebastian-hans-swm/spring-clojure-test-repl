@@ -7,8 +7,8 @@ GROUP_ID="$1"
 ARTIFACT_ID="$2"
 VERSION="$3"
 ARTIFACT_BASENAME="$ARTIFACT_ID-$VERSION"
-POM=`find /cygdrive/c/Users/"$USER"/.m2/repository-nexus.intra.swm.de -type f -name "$ARTIFACT_BASENAME.pom"`
-JAR=`find /cygdrive/c/Users/"$USER"/.m2/repository-nexus.intra.swm.de -type f -name "$ARTIFACT_BASENAME.jar"`
+POM=`find /cygdrive/c/Users/"$USER"/.m2/repository-artifactory.intra.swm.de -type f -name "$ARTIFACT_BASENAME.pom"`
+JAR=`find /cygdrive/c/Users/"$USER"/.m2/repository-artifactory.intra.swm.de -type f -name "$ARTIFACT_BASENAME.jar"`
 if [ "$POM" = "" ] || [ "$JAR" = "" ]; then
 	echo "Kann Artefakt nicht finden" >&2
 	echo "POM=$POM" >&2
