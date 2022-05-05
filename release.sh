@@ -52,7 +52,7 @@ $GIT commit -m "[release] set version to $RELEASE_VERSION"
 failIfReturncodeNot0 $?
 
 echo Tagging release
-$GIT tag -a "relesae/$RELEASE_VERSION" -m "Release version $RELEASE_VERSION"
+$GIT tag -a "release/$RELEASE_VERSION" -m "Release version $RELEASE_VERSION"
 failIfReturncodeNot0 $?
 
 echo Incrementing snapshot version
