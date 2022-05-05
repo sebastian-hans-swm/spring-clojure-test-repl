@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##### Bamboo variables
-export JAVA_NOME=$bamboo_capability_system_jdk_OpenJDK_17_0_1
+export JAVA_HOME=$bamboo_capability_system_jdk_OpenJDK_17_0_1
 
 export MVN_HOME=$bamboo_capability_system_builder_mvn3_Maven_3
 MVN_EXEC=$MVN_HOME/bin/mvn
