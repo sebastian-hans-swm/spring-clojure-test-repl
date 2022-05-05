@@ -31,8 +31,6 @@ failIfReturncodeNot0 $?
 $MAVEN -v
 failIfReturncodeNot0 $?
 
-$GIT checkout master
-
 CURRENT_VERSION=$(readVersion)
 echo Current version is $CURRENT_VERSION
 
