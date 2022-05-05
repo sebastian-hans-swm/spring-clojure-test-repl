@@ -59,16 +59,18 @@ echo Incrementing snapshot version
 $MAVEN build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT
 failIfReturncodeNot0 $?
 
+NEXT_SNAPSHOT_VERSION=$(readVersion)
+
 cat <<EOF >CHANGELOG.md
 # test-repl $NEXT_SNAPSHOT_VERSION
 
 $(cat CHANGELOG.md)
 EOF
 
-echo Committing snapshot version update
-NEXT_SNAPSHOT_VERSION=$(readVersion)
 $GIT add CHANGELOG.md pom.xml
 failIfReturncodeNot0 $?
+
+echo Committing snapshot version update
 $GIT commit -m "[release] set next snapshot version to $NEXT_SNAPSHOT_VERSION"
 failIfReturncodeNot0 $?
 
