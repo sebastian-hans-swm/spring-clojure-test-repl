@@ -12,7 +12,7 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
 			<dependency>
 				<groupId>de.swm.test</groupId>
 				<artifactId>test-repl</artifactId>
-				<version>1.3.0</version>
+				<version>1.6.0</version>
 				<scope>runtime</scope>
                 <classifier>include-clojars</classifier>
 			</dependency>

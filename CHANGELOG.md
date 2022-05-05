@@ -1,3 +1,6 @@
+# test-repl 1.6.0
+Mucked around with the release process
+
 # test-repl 1.5.0
 Mucked around with the release process
 
