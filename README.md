@@ -2,8 +2,8 @@
 Adds a Clojure REPL to Spring applications to support interactive bug hunting.
 
 ## Integration
-To use, add the following snippet to your POM and **build** and **run** your Spring application with profile `test
--repl`.
+To use, add the following snippet to your POM and **build** and **run** your Spring application with profile
+`test-repl`.
 ```xml
 <profiles>
 	<profile>
@@ -14,6 +14,7 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
 				<artifactId>test-repl</artifactId>
 				<version>1.3.0</version>
 				<scope>runtime</scope>
+                <classifier>include-clojars</classifier>
 			</dependency>
 		</dependencies>
 	</profile>
@@ -25,6 +26,8 @@ Putting the dependency in a Maven profile ensures that the dependency on Clojure
 When running the application, activate the spring profile `test-repl` to automatically start a REPL listening on `localhost:7888`.
 The port can be changed by setting the property `test.repl.port` to a different port.
 The bind address can be changed by setting the property `test.repl.bind-address` to a different value.
+
+Since JDK 16, the following JDK options are required to make the reflection in Clojure work: `--add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED`
 
 ## Usage
 
@@ -39,9 +42,9 @@ Type Clojure code into the REPL and have fun.
 
 ### Available Functions
 This project includes the following Clojure libraries.
-* [org.clojure/tools.nrepl 0.2.13](https://github.com/clojure/tools.nrepl) for provisioning of the nREPL
-* [org.clojure/data.json 0.2.6](https://github.com/clojure/data.json) for JSON parsing and building
-* [http-kit 2.4.0-alpha3](http://www.http-kit.org/) for HTTP requests
+* [nrepl/nrepl 0.9.0](https://github.com/nrepl/nrepl) for provisioning of the nREPL
+* [org.clojure/data.json 2.4.0](https://github.com/clojure/data.json) for JSON parsing and building
+* [http-kit 2.5.3](http://www.http-kit.org/) for HTTP requests
 * [enlive 1.1.6](https://github.com/cgrand/enlive) for HTML parsing
 
 Access to the Spring application context is provided via the static method `REPLServer.getContext`,

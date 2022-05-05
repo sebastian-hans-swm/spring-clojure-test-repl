@@ -1,7 +1,3 @@
-/*
- * Copyright 2018 SWM Services GmbH
- */
-
 package de.swm.test.repl;
 
 import org.springframework.beans.factory.annotation.Value;

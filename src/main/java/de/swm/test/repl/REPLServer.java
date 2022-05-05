@@ -1,7 +1,3 @@
-/*
- * Copyright 2018 SWM Services GmbH
- */
-
 package de.swm.test.repl;
 
 import clojure.java.api.Clojure;
@@ -38,8 +34,8 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
 	@Override
 	public void afterPropertiesSet() {
 		if (serverInstance == null) {
-			Clojure.var("clojure.core", "require").invoke(Clojure.read("clojure.tools.nrepl.server"));
-			serverInstance = Clojure.var("clojure.tools.nrepl.server", "start-server")
+			Clojure.var("clojure.core", "require").invoke(Clojure.read("nrepl.server"));
+			serverInstance = Clojure.var("nrepl.server", "start-server")
 					.invoke(Clojure.read(":port"), port,
 							Clojure.read(":bind"), bindAddress);
 			LOGGER.info("Started nREPL on {}:{}", bindAddress, port);
@@ -50,7 +46,7 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
 	public void destroy() {
 		if (serverInstance != null) {
 			LOGGER.info("Shutting down nREPL on {}:{}", bindAddress, port);
-			Clojure.var("clojure.tools.nrepl.server", "stop-server").invoke(serverInstance);
+			Clojure.var("nrepl.server", "stop-server").invoke(serverInstance);
 			serverInstance = null;
 		}
 	}
