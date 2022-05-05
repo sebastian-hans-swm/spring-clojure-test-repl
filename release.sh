@@ -14,7 +14,7 @@ GIT=$bamboo_capability_system_git_executable
 ##### Helper functions
 failIfReturncodeNot0() {
   if [ $1 -ne 0 ]; then
-    echo -n "returncode war nicht 0 sondern $1" >&2
+    echo -n "ABORT: return code was $1" >&2
     exit 1
   fi
 }
@@ -73,7 +73,7 @@ $GIT commit -m "[release] set next snapshot version to $NEXT_SNAPSHOT_VERSION"
 failIfReturncodeNot0 $?
 
 echo Pushing
-$GIT push --set-upstream origin
+$GIT push --set-upstream origin master
 failIfReturncodeNot0 $?
 $GIT push origin --tags
 failIfReturncodeNot0 $?
