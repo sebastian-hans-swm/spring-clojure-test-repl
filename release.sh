@@ -73,7 +73,7 @@ $GIT commit -m "[release] set next snapshot version to $NEXT_SNAPSHOT_VERSION"
 failIfReturncodeNot0 $?
 
 echo Pushing
-$GIT push origin
+$GIT push --set-upstream origin
 failIfReturncodeNot0 $?
 $GIT push origin --tags
 failIfReturncodeNot0 $?
