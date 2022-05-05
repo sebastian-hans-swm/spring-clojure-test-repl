@@ -6,18 +6,18 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
 `test-repl`.
 ```xml
 <profiles>
-	<profile>
-		<id>test-repl</id>
-		<dependencies>
-			<dependency>
-				<groupId>de.swm.test</groupId>
-				<artifactId>test-repl</artifactId>
-				<version>1.8.0</version>
-				<scope>runtime</scope>
+    <profile>
+        <id>test-repl</id>
+        <dependencies>
+            <dependency>
+                <groupId>de.swm.test</groupId>
+                <artifactId>test-repl</artifactId>
+                <version>1.8.0</version>
+                <scope>runtime</scope>
                 <classifier>include-clojars</classifier>
-			</dependency>
-		</dependencies>
-	</profile>
+            </dependency>
+        </dependencies>
+    </profile>
 </profiles>
 ```
 
