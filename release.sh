@@ -25,6 +25,12 @@ readVersion() {
 }
 
 ##### Release process
+"$JAVA_HOME"/bin/java -version
+failIfReturncodeNot0 $?
+
+$MAVEN -v
+failIfReturncodeNot0 $?
+
 CURRENT_VERSION=$(readVersion)
 echo Current version is $CURRENT_VERSION
 
