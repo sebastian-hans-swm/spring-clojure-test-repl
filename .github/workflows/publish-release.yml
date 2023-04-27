@@ -1,0 +1,78 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: Maven Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        server-id: github
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+    - name: Set release version
+      id: release
+      run: |
+        CURRENT_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.1:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo Current version is $CURRENT_VERSION
+        echo Removing SNAPSHOT suffix
+        mvn versions:set -DremoveSnapshot
+        RELEASE_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.1:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo Releasing version $RELEASE_VERSION
+        echo version=$RELEASE_VERSION >> $GITHUB_OUTPUT
+
+    - name: Build with Maven
+      run: mvn -B package
+      
+    - name: Commit release
+      run: |
+        git add pom.xml
+        git commit -m "[release] set version to ${{ steps.release.outputs.version }}"
+
+    - name: Tag release
+      run: git tag -a "release/${{ steps.release.outputs.version }}" -m "Release version ${{ steps.release.outputs.version }}"
+
+    - name: Increment snapshot version
+      id: next-version
+      run: |
+        mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT
+        NEXT_SNAPSHOT_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.1:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo next-version=NEXT_SNAPSHOT_VERSION >> $GITHUB_OUTPUT
+        
+    - name: Update CHANGELOG
+      run: |
+        cat <<EOF >CHANGELOG.md
+        # test-repl ${{ steps.next-version.outputs.next-version }}
+
+        $(cat CHANGELOG.md)
+        EOF
+
+    - name: Commit snapshot version update
+      run: |
+        git add CHANGELOG.md pom.xml
+        git commit -m "[release] set next snapshot version to ${{ steps.next-version.outputs.next-version }}"
+
+    - name: Push update
+      run: |
+        git push --set-upstream origin main
+        git push origin --tags
+
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
