@@ -10,9 +10,9 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
         <id>test-repl</id>
         <dependencies>
             <dependency>
-                <groupId>de.swm.test</groupId>
-                <artifactId>test-repl</artifactId>
-                <version>1.12.0</version>
+                <groupId>de.sebhans.test</groupId>
+                <artifactId>spring-clojure-test-repl</artifactId>
+                <version>1.0.0</version>
                 <scope>runtime</scope>
                 <classifier>include-clojars</classifier>
             </dependency>
@@ -51,7 +51,7 @@ Access to the Spring application context is provided via the static method `REPL
 which means you can access Spring beans from the REPL like this:
 ```clojure
 ; Import REPLServer class so its methods are available in the REPL:
-(import '(de.swm.test.repl REPLServer))
+(import '(de.sebhans.test.repl REPLServer))
 
 ; Define helper function to access beans:
 (defn get-bean
