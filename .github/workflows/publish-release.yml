@@ -41,7 +41,7 @@ jobs:
     - name: Push release version
       uses: EndBug/add-and-commit@v9
       with:
-        add: 'pom.xml'
+        add: pom.xml
         message: '[release] set version to ${{ steps.release.outputs.version }}'
         tag: -a 'release/${{ steps.release.outputs.version }}' -m 'Release version ${{ steps.release.outputs.version }}'
         push: true
@@ -64,9 +64,7 @@ jobs:
     - name: Push snapshot version update
       uses: EndBug/add-and-commit@v9
       with:
-        add:
-        - 'CHANGELOG.md'
-        - 'pom.xml'
+        add: CHANGELOG.md pom.xml
         message: '[release] set next snapshot version to ${{ steps.next-version.outputs.next-version }}'
         push: true
 
