@@ -57,7 +57,7 @@ jobs:
     - name: Update CHANGELOG
       run: |
         cat <<EOF >CHANGELOG.md
-        # test-repl ${{ steps.next-version.outputs.next-version }}
+        # spring-clojure-test-repl ${{ steps.next-version.outputs.next-version }}
 
         $(cat CHANGELOG.md)
         EOF
