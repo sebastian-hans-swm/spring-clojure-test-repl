@@ -40,7 +40,7 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
             Clojure.var("clojure.core", "require")
                     .invoke(Clojure.read("cider.nrepl"),
                             Clojure.read(":refer"),
-                            List.of(Clojure.read("cider-nrepl-handler")));
+                            Clojure.read("[cider-nrepl-handler]"));
             serverInstance = Clojure.var("nrepl.server", "start-server")
                     .invoke(Clojure.read(":port"), port,
                             Clojure.read(":bind"), bindAddress,
