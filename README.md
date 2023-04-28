@@ -1,4 +1,4 @@
-# test-repl
+# spring-clojure-test-repl
 Adds a Clojure REPL to Spring applications to support interactive bug hunting.
 
 ## Integration
@@ -12,7 +12,7 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
             <dependency>
                 <groupId>de.sebhans.test</groupId>
                 <artifactId>spring-clojure-test-repl</artifactId>
-                <version>1.0.0</version>
+                <version>1.2.0</version>
                 <scope>runtime</scope>
                 <classifier>include-clojars</classifier>
             </dependency>
