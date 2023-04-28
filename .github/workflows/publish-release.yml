@@ -6,16 +6,12 @@ name: Publish release
 on:
   workflow_dispatch
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   build:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps:
