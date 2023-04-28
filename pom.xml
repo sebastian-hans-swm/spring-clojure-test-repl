@@ -47,6 +47,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>cider</groupId>
+            <artifactId>cider-nrepl</artifactId>
+            <version>0.30.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.clojure</groupId>
             <artifactId>data.json</artifactId>
             <version>2.4.0</version>

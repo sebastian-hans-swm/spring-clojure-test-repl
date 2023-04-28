@@ -5,7 +5,9 @@ Dependency updates:
 - slf4j-api 2.0.7
 - spring-context 6.0.8
 
-Reworked build process
+Rework build process.
+
+Add cider-nrepl.
 
 # spring-clojure-test-repl 1.1.0
 Release process test

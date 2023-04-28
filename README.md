@@ -34,8 +34,9 @@ Since JDK 16, the following JDK options are required to make the reflection in C
 
 ### Connecting to the REPL
 Use your favorite nREPL client to connect to `localhost:7888`.
-The only client which has been tested extensively (because I use it) is
-[GNU Emacs](https://www.gnu.org/software/emacs/) with [Monroe](https://github.com/sanel/monroe/).
+The only clients which have been tested (because I use them) are
+[Monroe](https://github.com/sanel/monroe/) and [CIDER](https://cider.mx/)
+with [GNU Emacs](https://www.gnu.org/software/emacs/).
 You might also try the [Clojure-Kit](https://plugins.jetbrains.com/plugin/8636-clojure-kit) IntelliJ plugin
 or any client listed on the [nREPL Clients](https://nrepl.org/nrepl/usage/clients.html) web page.
 
@@ -44,6 +45,7 @@ Type Clojure code into the REPL and have fun.
 ### Available Functions
 This project includes the following Clojure libraries.
 * [nrepl 1.0.0](https://github.com/nrepl/nrepl) for provisioning of the nREPL
+* [cider-nrepl 0.30.0](https://github.com/clojure-emacs/cider-nrepl) for better integration with [CIDER](https://cider.mx/)
 * [org.clojure/data.json 2.4.0](https://github.com/clojure/data.json) for JSON parsing and building
 * [http-kit 2.6.0](https://github.com/http-kit/http-kit) for HTTP requests
 * [enlive 1.1.6](https://github.com/cgrand/enlive) for HTML parsing
