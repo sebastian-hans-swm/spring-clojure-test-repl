@@ -46,15 +46,22 @@ jobs:
         git commit -m '[release] set version to ${{ steps.release.outputs.version }}'
 
     - name: Tag release
-      run: |
-        git tag -a 'release/${{ steps.release.outputs.version }}' -m 'Release version ${{ steps.release.outputs.version }}'
+      run: git tag -a 'release/${{ steps.release.outputs.version }}' -m 'Release version ${{ steps.release.outputs.version }}'
+
+    - name: Push release
+      run: git push --set-upstream origin --tags main
+
+    - name: Publish to GitHub Packages Apache Maven
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Increment snapshot version
       id: next-version
       run: |
         mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT
         NEXT_SNAPSHOT_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.1:evaluate -Dexpression=project.version -q -DforceStdout)
-        echo next-version=NEXT_SNAPSHOT_VERSION >> $GITHUB_OUTPUT
+        echo next-version=$NEXT_SNAPSHOT_VERSION >> $GITHUB_OUTPUT
         
     - name: Update CHANGELOG
       run: |
@@ -69,11 +76,5 @@ jobs:
         git add CHANGELOG.md pom.xml
         git commit -m '[release] set next snapshot version to ${{ steps.next-version.outputs.next-version }}'
 
-    - name: Push update
-      run: |
-        git push --set-upstream origin --tags main
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - name: Push snapshot version update
+      run: git push origin main
