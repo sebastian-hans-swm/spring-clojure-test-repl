@@ -1,12 +1,12 @@
 package de.sebhans.test.repl;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Configuration
-public class REPLConfiguration {
+@AutoConfiguration
+public class REPLAutoConfiguration {
 	@Value("${test.repl.port:7888}")
 	private long port;
 
