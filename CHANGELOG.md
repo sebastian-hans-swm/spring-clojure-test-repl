@@ -1,3 +1,5 @@
+# spring-clojure-test-repl 1.3.0-SNAPSHOT
+
 # spring-clojure-test-repl 1.2.0-SNAPSHOT
 Dependency updates:
 - http-kit 2.6.0
