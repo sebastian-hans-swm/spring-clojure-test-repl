@@ -37,14 +37,11 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
     public void afterPropertiesSet() {
         if (serverInstance == null) {
             Clojure.var("clojure.core", "require").invoke(Clojure.read("nrepl.server"));
-            Clojure.var("clojure.core", "require")
-                    .invoke(Clojure.read("cider.nrepl"),
-                            Clojure.read(":refer"),
-                            Clojure.read("[cider-nrepl-handler]"));
+            Clojure.var("clojure.core", "require").invoke(Clojure.read("cider.nrepl"));
             serverInstance = Clojure.var("nrepl.server", "start-server")
                     .invoke(Clojure.read(":port"), port,
                             Clojure.read(":bind"), bindAddress,
-                            Clojure.read(":handler"), Clojure.var("cider-nrepl-handler"));
+                            Clojure.read(":handler"), Clojure.var("cider.nrepl", "cider-nrepl-handler"));
             LOGGER.info("Started nREPL on {}:{}", bindAddress, port);
         }
     }
