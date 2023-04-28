@@ -9,6 +9,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.util.List;
+
 public class REPLServer implements ApplicationContextAware, InitializingBean, DisposableBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(REPLServer.class);
     private static ApplicationContext applicationContext = null;
@@ -38,7 +40,7 @@ public class REPLServer implements ApplicationContextAware, InitializingBean, Di
             Clojure.var("clojure.core", "require")
                     .invoke(Clojure.read("cider.nrepl"),
                             Clojure.read(":refer"),
-                            Clojure.read("(cider-nrepl-handler)"));
+                            List.of(Clojure.read("cider-nrepl-handler")));
             serverInstance = Clojure.var("nrepl.server", "start-server")
                     .invoke(Clojure.read(":port"), port,
                             Clojure.read(":bind"), bindAddress,
