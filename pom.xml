@@ -27,10 +27,6 @@
 
     <repositories>
         <repository>
-            <id>clojars-local</id>
-            <url>file://${basedir}/clojars</url>
-        </repository>
-        <repository>
             <id>clojars.org</id>
             <url>https://repo.clojars.org</url>
         </repository>
@@ -93,6 +89,12 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
@@ -103,22 +105,45 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.5.0</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>${project.basedir}/include-clojars.xml</descriptor>
-                    </descriptors>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
+                        <id>unpack-clojure-dependencies</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>unpack-dependencies</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludeGroupIds>org.springframework,org.springframework.boot, org.slf4j:*</excludeGroupIds>
+                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.1</version>
             </plugin>
         </plugins>
     </build>

@@ -14,7 +14,6 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
                 <artifactId>spring-clojure-test-repl</artifactId>
                 <version>1.2.0</version>
                 <scope>runtime</scope>
-                <classifier>include-clojars</classifier>
             </dependency>
         </dependencies>
     </profile>
