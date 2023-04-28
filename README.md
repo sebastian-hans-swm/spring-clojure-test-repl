@@ -2,7 +2,7 @@
 Adds a Clojure REPL to Spring applications to support interactive bug hunting.
 
 ## Integration
-To use, add the following snippet to your POM and **build** and **run** your Spring application with profile
+To use, add the following snippet to your POM and **build** and **run** your Spring Boot application with profile
 `test-repl`.
 ```xml
 <profiles>
@@ -23,9 +23,11 @@ To use, add the following snippet to your POM and **build** and **run** your Spr
 
 Putting the dependency in a Maven profile ensures that the dependency on Clojure does not pollute any builds (test, production, dev) unless explicitly enabled during the Maven build.
 
-When running the application, activate the spring profile `test-repl` to automatically start a REPL listening on `localhost:7888`.
+When running a Spring Boot application, activate the Spring profile `test-repl` to automatically start a REPL listening on `localhost:7888`.
 The port can be changed by setting the property `test.repl.port` to a different port.
 The bind address can be changed by setting the property `test.repl.bind-address` to a different value.
+
+For a Spring-only application (without Spring Boot), you need to create a Bean of type `de.sebhans.test.repl.REPLServer` yourself, passing the bind address and port as parameters to the constructor.
 
 Since JDK 16, the following JDK options are required to make the reflection in Clojure work: `--add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED`
 
