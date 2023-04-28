@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Apr 28 13:19:29 CEST 2023
+nrepl-1.0.0.jar>=
+nrepl-1.0.0.pom>=

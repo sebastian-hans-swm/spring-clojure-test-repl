@@ -42,9 +42,9 @@ Type Clojure code into the REPL and have fun.
 
 ### Available Functions
 This project includes the following Clojure libraries.
-* [nrepl/nrepl 0.9.0](https://github.com/nrepl/nrepl) for provisioning of the nREPL
+* [nrepl 1.0.0](https://github.com/nrepl/nrepl) for provisioning of the nREPL
 * [org.clojure/data.json 2.4.0](https://github.com/clojure/data.json) for JSON parsing and building
-* [http-kit 2.5.3](http://www.http-kit.org/) for HTTP requests
+* [http-kit 2.6.0](https://github.com/http-kit/http-kit) for HTTP requests
 * [enlive 1.1.6](https://github.com/cgrand/enlive) for HTML parsing
 
 Access to the Spring application context is provided via the static method `REPLServer.getContext`,

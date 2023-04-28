@@ -7,19 +7,21 @@ GROUP_ID="$1"
 ARTIFACT_ID="$2"
 VERSION="$3"
 ARTIFACT_BASENAME="$ARTIFACT_ID-$VERSION"
-POM=`find /cygdrive/c/Users/"$USER"/.m2/repository-artifactory.intra.swm.de -type f -name "$ARTIFACT_BASENAME.pom"`
-JAR=`find /cygdrive/c/Users/"$USER"/.m2/repository-artifactory.intra.swm.de -type f -name "$ARTIFACT_BASENAME.jar"`
+POM=`find ~/.m2/repository* -type f -name "$ARTIFACT_BASENAME.pom"`
+JAR=`find ~/.m2/repository* -type f -name "$ARTIFACT_BASENAME.jar"`
 if [ "$POM" = "" ] || [ "$JAR" = "" ]; then
-	echo "Kann Artefakt nicht finden" >&2
+	echo "Cannot find artifacts" >&2
 	echo "POM=$POM" >&2
 	echo "JAR=$JAR" >&2
 	exit 1
 fi
-mvn install:install-file \
-	-DpomFile=$(cygpath -w "$POM") \
-	-Dfile=$(cygpath -w "$JAR") \
+cp "$POM" "$JAR" ./
+mvn org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file \
+	-DpomFile="$ARTIFACT_BASENAME.pom" \
+	-Dfile="$ARTIFACT_BASENAME.jar" \
 	-DgroupId="$GROUP_ID" \
 	-DartifactId="$ARTIFACT_ID" \
 	-Dversion="$VERSION" \
 	-Dpackaging=jar \
 	-DlocalRepositoryPath=./clojars
+rm ./"$ARTIFACT_BASENAME.pom" ./"$ARTIFACT_BASENAME.jar"
