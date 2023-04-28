@@ -6,6 +6,11 @@ name: Publish release
 on:
   workflow_dispatch
 
+permissions:
+  - contents: write
+  - metadata: read
+  - packages: write
+
 jobs:
   build:
 
